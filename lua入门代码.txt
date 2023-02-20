@@ -1,0 +1,161 @@
+print("hello world!")
+--lua中的变量默认全局变量，局部变量要前面加local
+
+a=1
+local localA =1 
+b=2
+
+a,b=1,2
+--nil有点类似于NULL
+--"没有赋值的变量都是nil，比如下面这个"
+print(c)
+
+--lua中double 和int 都是number类型
+
+d = 0x1f
+e = 2e10
+f = 0723
+--**************************************字符串****************************************
+g = 'gg'
+h = "hh"--一个点两个点都可以
+--以下也是字符串，换行不会消失
+i = [[
+dawhihdfoihaoihd
+dahoxxhs
+///
+sdjoia
+ws
+]]
+j = tostring(10)
+k = tonumber("abc")--这个打印出来会是nil
+l = g..h--字符串连接是两个点
+
+print(#h)--可以看到h的长度
+
+--***********************************函数***********************************************
+
+m = function(...)
+
+end
+--等同于下面这种写法
+function n( ... )
+    -- body
+end
+
+--函数调用
+
+function testfunction1(a,b)
+    print(a,b)
+end
+
+testfunction1(1,2)
+--如果只传了两个值但函数需要三个值，那未被传入的值就是nil
+
+function testfunction2(a,b)
+--可以用return返回变量，可以返回多个变量
+    return a,b
+end
+
+o,p = testfunction2(a,b)
+print(o,p)
+
+--********************************数组**********************************
+--lua中数组是table，可以存各种类型的变量，其实更像list或者struct
+q = {1,"qq",{},function() end}
+--首元素下标是1，而不是0，这点和其他语言不一样
+q[5] = 123
+print(q[5])
+print(#q)--数组内元素个数
+
+table.insert(q, "d")--向table中插入一个元素
+print(#q)--此时变成6个元素
+
+table.insert(q,2,"可以选指定位置插入元素")
+r = table.remove(q,6)--移除的元素可以返回，此处返回给了r
+
+--字符串作为下标的table
+s = {
+    t = 1,
+    u = "1234",
+    v = function()
+
+    end,
+    --这样下标就变成了字符串
+    --还可以更灵活,比如下面这个变量
+    [",;"] = 123
+}
+
+print(s[t])
+print(s[",;"])
+--同时可以直接对下标赋值
+s["下标"] = "table内值"
+
+--**********************************真和假*******************************************
+
+w = true
+x = false
+
+print(1>2)
+print(1<2)
+print(1>=2)
+print(1<=2)
+print(1==2)
+print(1~=2)--注意，这里是波浪号
+
+print(w and x)
+print(w or x)
+print(not w)
+
+--注意：lua中只有false和nil代表假。      ！！！！0代表真！！！！
+y = nil
+z = 0
+print(y and z)--nil
+print(y or z)--0,返回true的时候发现不是true而是0，所以返回这个值
+print(not y)--true
+
+
+--****************************************if**********************************************
+if 1>10 then
+    print("1>10")
+elseif(1<10) then
+    print("1<10")
+else
+    print(".......")
+end--即使是if，也要写end
+
+--*******************************************循环******************************************
+
+--******************************************if循环
+for aa=1,10 do
+    print(aa)
+end
+--1,2...打印到10
+
+for ab=1,10,2 do--这里的2是步长,步长可以是负数，相当于C里经常出现的i--
+    print(ab)
+end
+--注意：此处aa,ab都不是全局变量
+--注意，在循环内不能对aa,ab修改，如果修改，则会默认新建一个同名的局部变量
+
+for ac=1,10 do
+    print(ac)
+    if ac ==5 then break end--用break跳出
+end
+
+--****************************************while循环
+
+ad = 10
+while ad >10 do
+    ad = ad -1
+    if ad==5 then break end
+end
+
+--补充：lua中的string其实更像C中的char的字符数组
+--比如，我们直接打ASCii码
+ae = string.char(0x30,0x31,0x32,0x33)
+print(ae)
+--*************************补充：其他的看lua5.3参考手册***********
+
+
+
+
